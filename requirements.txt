@@ -1,0 +1,17 @@
+flask
+flask_cors
+werkzeug
+pydicom
+numpy
+opencv-python
+matplotlib
+scikit-image
+Pillow
+scipy
+keras
+tensorflow
+fpdf
+pathlib
+pyrogram
+waitress
+tgcrypto
