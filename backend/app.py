@@ -9,7 +9,7 @@ from pyrogram import Client
 import os
 import sys
 sys.path.append(os.path.abspath("../aihandler"))
-# from liver_trauma_detection import ai_main_func  # nopep8
+from liver_trauma_detection import ai_main_func  # nopep8
 
 WORKINGDIR = os.path.abspath("../aiworkingdir")
 UPLOAD_FOLDER = os.path.join(WORKINGDIR, "uploads")
@@ -79,5 +79,6 @@ def download():
 def create_app():
     return app
 
+
 if __name__ == '__main__':
-   app.run(debug = True)
+    app.run(debug=True)
