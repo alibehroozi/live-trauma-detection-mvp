@@ -44,6 +44,10 @@
       function displyfunc() {
         document.getElementById("sendreporttodr").style.display = "flex";
       }
+      
+      function nodisplyfunc(){
+            document.getElementById("sendreporttodr").style.display="none"
+        }
     </script>
   </head>
   <body class="bg-light">
@@ -89,6 +93,7 @@
                 method="post"
                 action=""
                 multiple
+                onclick="setTimeout(nodisplyfunc, 500);
               />
             </div>
             <input
