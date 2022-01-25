@@ -15,10 +15,10 @@
         $.ajax({
           headers: {
             "Access-Control-Allow-Origin":
-              "http://" + window.location.hostname + ":8004",
+              "https://" + window.location.hostname + ":8005",
           },
           method: "POST",
-          url: "http://" + window.location.hostname + ":8080/upload-dicom", // backend url
+          url: "https://" + window.location.hostname + ":8080/upload-dicom", // backend url
           data: formData,
           cache: false,
           contentType: false,
@@ -139,7 +139,7 @@
         <hr />
         <p class="text-white">download report here</p>
         <a
-          onclick="window.open('http://' + window.location.hostname + ':8080/download-report', '_blank');"
+          onclick="window.open('https://' + window.location.hostname + ':8080/download-report', '_blank');"
           target="_blank"
           class="btn btn-outline-info p-2"
           style="width: fit-content"
