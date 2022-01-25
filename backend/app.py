@@ -9,7 +9,7 @@ from pyrogram import Client
 import os
 import sys
 sys.path.append(os.path.abspath("../aihandler"))
-from liver_trauma_detection import ai_main_func  # nopep8
+# from liver_trauma_detection import ai_main_func  # nopep8
 
 WORKINGDIR = os.path.abspath("../aiworkingdir")
 UPLOAD_FOLDER = os.path.join(WORKINGDIR, "uploads")
@@ -51,10 +51,12 @@ def upload_file():
             return jsonify(status="true")
 
 
-@app.route('/send-telegram/<username>', methods=['GET', 'POST'])
-def send_telegram(username):
-    print(username)
-    os.system(f'python3 send.py "{username}"')
+@app.route('/send-telegram', methods=['GET', 'POST'])
+def send_telegram():
+    data = request.get_data()
+    data2 = str(data)
+    data3 = data2[3:-2]
+    os.system(f'python3 send.py "{data3}"')
     return jsonify(msg="ok"), 200
 
 
@@ -76,3 +78,6 @@ def download():
 
 def create_app():
     return app
+
+if __name__ == '__main__':
+   app.run(debug = True)
