@@ -14,6 +14,7 @@ from liver_trauma_detection import ai_main_func  # nopep8
 WORKINGDIR = os.path.abspath("../aiworkingdir")
 UPLOAD_FOLDER = os.path.join(WORKINGDIR, "uploads")
 ALLOWED_EXTENSIONS = {'zip'}
+REPORTFILE = Path(WORKINGDIR) / "report_final" / "report.zip"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -42,6 +43,8 @@ def upload_file():
             uploadFolderPath = Path(app.config['UPLOAD_FOLDER'])
             if not uploadFolderPath.exists():
                 os.mkdir(uploadFolderPath)
+            if REPORTFILE.exists():
+                os.remove(REPORTFILE)
             uploadedFile = os.path.join(
                 app.config['UPLOAD_FOLDER'], "dicom_study.zip")
             file.save(uploadedFile)
@@ -62,15 +65,13 @@ def send_telegram():
 
 @app.route('/download-report', methods=['GET', 'POST'])
 def download():
-    downloadFile = Path(WORKINGDIR) / "report_final" / "report.zip"
-    if downloadFile.exists():
-        f = open(downloadFile, "rb")
+    if REPORTFILE.exists():
+        f = open(REPORTFILE, "rb")
         f.seek(0)
         response = make_response(f.read())
         response.headers.set('Content-Type', 'zip')
         response.headers.set('Content-Disposition', 'attachment', filename='%s' %
-                             os.path.basename(downloadFile))
-        os.remove(downloadFile)
+                             os.path.basename(REPORTFILE))
         return response
     else:
         return "Report is not ready yet"
