@@ -11,9 +11,8 @@ api_hash = '65b3a547d9d2f0b6145a8ad3896e6313'               # account 0917389862
 client = Client(session_name='myclient', api_id=api_id, api_hash=api_hash)
 
 
-
-temp = f"{Path(WORKINGDIR)}" + "/" + "report_final" + "/" + "report.zip"
+temp = f'{WORKINGDIR}/report_final/report.zip'
 
 
 client.start()
-client.send_document(sys.argv[1], str(temp))
+client.send_document(sys.argv[1], f"{temp}")
