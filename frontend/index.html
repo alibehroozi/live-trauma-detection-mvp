@@ -17,14 +17,14 @@
           headers: {
             "Access-Control-Allow-Origin":
               window.location.protocol +
-              "://" +
+              "//" +
               window.location.hostname +
               ":8005",
           },
           method: "POST",
           url:
             window.location.protocol +
-            "://" +
+            "//" +
             window.location.hostname +
             ":8080/upload-dicom", // backend url
           data: formData,
@@ -132,7 +132,7 @@
           </button>
           <p class="text-white mt-1">download report here</p>
           <a
-            href="window.open(window.location.protocol + '://' + window.location.hostname + ':8080/download-report"
+            href="window.open(window.location.protocol + '//' + window.location.hostname + ':8080/download-report"
             target="_blank"
             class="btn btn-dark py-2 px-3"
             style="width: fit-content"
@@ -164,7 +164,7 @@
         console.log(e);
         fetch(
           window.location.protocol +
-            "://" +
+            "//" +
             window.location.hostname +
             ":8080/send-telegram",
           {

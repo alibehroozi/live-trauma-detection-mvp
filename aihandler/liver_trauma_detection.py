@@ -176,7 +176,7 @@ def my_predict(pathOfTestFile):
 def report_gen(result):
     for x in result:
         if(x[0] > x[1]):
-            return ("Algorithm Diagnosis: Teruma ("+str(x[0]*100)+"%)")
+            return ("Algorithm Diagnosis: Trauma ("+str(x[0]*100)+"%)")
         else:
             return ("Algorithm Diagnosis: Normal ("+str(x[1]*100)+"%)")
 
