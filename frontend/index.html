@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,16 +9,24 @@
     <script src="./jquery.js"></script>
     <script>
       //uplpoad file
+
       $(document).on("submit", "#first_form", function (e) {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
           headers: {
             "Access-Control-Allow-Origin":
-              "https://" + window.location.hostname + ":8005",
+              window.location.protocol +
+              "://" +
+              window.location.hostname +
+              ":8005",
           },
           method: "POST",
-          url: "https://" + window.location.hostname + ":8080/upload-dicom", // backend url
+          url:
+            window.location.protocol +
+            "://" +
+            window.location.hostname +
+            ":8080/upload-dicom", // backend url
           data: formData,
           cache: false,
           contentType: false,
@@ -30,54 +37,36 @@
           },
           success: function (data) {
             $('button[id="btnsubmit"]').removeAttr("disabled");
-            $("#uploadDICOMzip").css("display", "none");
-            $("#sendreporttodr").css("display", "flex");
           },
         });
       });
 
-      //download report
-      function download() {
-        axios({
-          url: "localhost:5000/download", // backend url
-          method: "GET",
-          responseType: "blob",
-          withCredentials: false,
-        }).then((response) => {
-          console.log(response);
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "report.zip");
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        });
+      function displyfunc() {
+        document.getElementById("sendreporttodr").style.display = "flex";
       }
-
-      //send to DR
-      $.ajax({
-        type: "POST",
-        url: "127.0.0.1:5000/sendTelegram/+989393118594", // backend url
-        data: $("select#DRsname").serialize(),
-      }).done(function (data) {
-        console.log("salam");
-      });
     </script>
   </head>
   <body class="bg-light">
-    <header class="navbar bg-dark align-items-center">
-      <div class="container-fluid">
-        <p class="bg-dark text-white text-center p-3">
-          liver truma detection system
-        </p>
-      </div>
+    <header class="navbar bg-primary">
+      <section class="container">
+        <a
+          href="https://rajaeehosp.sums.ac.ir"
+          tareg="_blank"
+          class="py-3 d-flex flex-row"
+        >
+          <img src="./imgs/logo-shirazRajai.png" alt="logo" />
+          <p class="text-white my-3 ms-1 text-decoration-none">
+            Shiraz Trauma Center
+          </p>
+        </a>
+      </section>
     </header>
     <section
-      class="d-flex flex-row mx-auto my-5 container bg-dark p-4 justify-content-evenly rounded-2"
+      class="d-flex flex-sm-column flex-md-row flex-lg-row mx-auto my-5 container p-4 justify-content-evenly rounded-2"
+      style="background-color: var(--bs-zeinblue)"
     >
       <section
-        class="d-flex flex-column mx-3 col-5 container p-2 bg-black rounded-2"
+        class="d-flex flex-column mx-3 col-5 container p-2 rounded-2 col-sm-12 col-md-6 col-lg-6"
       >
         <img
           src="./imgs/3641634.jpg"
@@ -85,16 +74,16 @@
           style="height: 30rem; width: 30rem"
         />
       </section>
-      <form id="first_form" enctype="multipart/form-data">
-        <section
-          class="d-flex flex-column mx-2 bg-black container px-2 rounded-2"
-          id="uploadDICOMzip"
-        >
+      <section
+        class="d-flex flex-column mx-2 container px-2 rounded-2 col-sm-12 col-md-6 col-lg-6"
+      >
+        <form id="first_form" enctype="multipart/form-data">
           <div class="col-5 mx-2 pt-3">
             <div class="my-3 rounded">
               <input
-                class="form-control"
+                class="form-control border-2 border-dark"
                 type="file"
+                accept=".zip,.rar,.7zip"
                 name="dicomzip"
                 id="uploadFile"
                 method="post"
@@ -104,48 +93,52 @@
             </div>
             <input
               type="submit"
-              value="Upload Now"
+              value="Upload"
               name="submit"
               id="btnsubmit"
-              class="btn btn-outline-success p-2"
+              class="btn btn-dark px-3 py-2"
+              onclick="setTimeout(displyfunc, 70000);"
             />
           </div>
-        </section>
-      </form>
-      <section
-        class="d-flex flex-column mx-2 bg-black container px-5 pt-3 rounded-2"
-        id="sendreporttodr"
-      >
-        <p class="text-white">send report to doctor</p>
-        <select
-          class="form-select w-50 p-2"
-          aria-label="select DR name"
-          id="DRsname"
+        </form>
+        <p class="py-2 text-warning ps-1">
+          note: just zip, rar and 7zip are accepted !
+        </p>
+        <section
+          class="flex-column mx-2container px-2 pt-3 rounded-2"
+          id="sendreporttodr"
+          style="display: none"
         >
-          <option selected>defult</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-        <hr />
-        <input
-          type="submit"
-          value="send"
-          name="submit"
-          id="btnsend"
-          class="btn btn-outline-success ps-2"
-          style="width: fit-content"
-        />
-        <hr />
-        <hr />
-        <p class="text-white">download report here</p>
-        <a
-          onclick="window.open('https://' + window.location.hostname + ':8080/download-report', '_blank');"
-          target="_blank"
-          class="btn btn-outline-info p-2"
-          style="width: fit-content"
-          >download
-        </a>
+          <p class="text-white pt-1">send report to doctor</p>
+          <select
+            class="form-select w-50 p-2 border-2 border-dark"
+            aria-label="select DR name"
+            id="DRsname"
+          >
+            <option value="@aliiiibeeeeeeeh">ali behrouzi</option>
+            <option value="ZeinabSayyadi">zeinab sayyadi</option>
+            <option value="shiersan98">mohammad abbasi</option>
+            <option value="Razieh_Zare">razieh zare</option>
+          </select>
+          <button
+            type="submit"
+            value="send"
+            name="submit"
+            id="btnsend"
+            class="btn btn-dark py-2 px-3 my-2"
+            style="width: fit-content"
+          >
+            send
+          </button>
+          <p class="text-white mt-1">download report here</p>
+          <a
+            href="window.open(window.location.protocol + '://' + window.location.hostname + ':8080/download-report"
+            target="_blank"
+            class="btn btn-dark py-2 px-3"
+            style="width: fit-content"
+            >download
+          </a>
+        </section>
       </section>
     </section>
     <footer></footer>
@@ -164,118 +157,31 @@
       integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
       crossorigin="anonymous"
     ></script>
-  </body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./CSS/bootstrap.css">
-    <script src="./jquery.js"> </script>
     <script>
-        //uplpoad file
-
-        $(document).on('submit','#first_form',function(e){
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                headers:{
-                    "Access-Control-Allow-Origin":"http://" + window.location.hostname + ":8004"
-                },
-                method:"POST",
-                url: "http://" + window.location.hostname + ":8080/upload-dicom", // backend url 
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                xhrFields: { withCredentials: true }, 
-                beforeSend:function(){
-                $('button[id="btnsubmit"]').attr('disabled','disabled');
-            },
-            success: function(data){
-                $('button[id="btnsubmit"]').removeAttr('disabled');
-            }
-            });
-        });
-
-        function displyfunc(){
-            document.getElementById("sendreporttodr").style.display="flex"
-        }
-    </script>
-
-</head>
-<body class="bg-light">
-    <header  class="navbar bg-primary">
-        <section class ="container ">
-            <a  href="https://rajaeehosp.sums.ac.ir" tareg="_blank" class="py-3 d-flex flex-row" >
-                <img src="./imgs/logo-shirazRajai.png" alt="logo">
-                <p class=" text-white my-3 ms-1 text-decoration-none">Shiraz Trauma Center</p>
-            </a>
-        </section>
-    </header>
-    <section class="d-flex flex-sm-column flex-md-row flex-lg-row mx-auto my-5  container p-4 justify-content-evenly rounded-2" style="background-color: var(--bs-zeinblue);">
-        <section class="d-flex flex-column  mx-3 col-5 container p-2  rounded-2 col-sm-12 col-md-6 col-lg-6">
-            <img src="./imgs/3641634.jpg" alt="doctors" style="height: 30rem; width: 30rem;">
-        </section>
-        <section class="d-flex flex-column  mx-2  container px-2 rounded-2  col-sm-12 col-md-6 col-lg-6" >
-            <form id="first_form" enctype="multipart/form-data" >
-                    <div class="col-5 mx-2 pt-3">
-                        <div class="my-3 rounded">
-                            <input class="form-control border-2 border-dark" type="file" accept=".zip,.rar,.7zip" name="chert" id="uploadFile" method="post" action=""  multiple>
-                        </div>
-                        <input type="submit" value="Upload" name="submit" id="btnsubmit" class="btn btn-dark px-3 py-2" onclick="setTimeout(displyfunc, 70000);">
-                    </div>     
-            </form>
-            <p class="py-2 text-warning ps-1" >note: just zip, rar and 7zip are accepted ! </p>
-            <section class="flex-column mx-2container px-2  pt-3 rounded-2" id="sendreporttodr"  style="display: none;">
-                <p class="text-white pt-1">send report to doctor</p>
-                <select class="form-select w-50 p-2 border-2 border-dark"   aria-label="select DR name" id="DRsname">
-                    <option value="@aliiiibeeeeeeeh">ali behrouzi</option>
-                    <option value="ZeinabSayyadi">zeinab sayyadi</option>
-                    <option value="shiersan98">mohammad abbasi</option>
-                    <option value="Razieh_Zare">razieh zare</option>
-                </select>
-                <button type="submit" value="send" name="submit" id="btnsend" class="btn btn-dark py-2  px-3 my-2" style="width: fit-content;">send</button>
-                <p class="text-white  mt-1">download report here</p>
-                <a href="window.open('http://' + window.location.hostname + ':8080/download-report" target="_blank" class="btn btn-dark py-2 px-3" style="width: fit-content;">download </a>
-            </section>
-        </section>
-    </section>
-    <footer>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script>
-    
-    let btns = document.getElementById('btnsend');
-    btns.onclick = function(){
-         e = document.getElementById('DRsname').value;
+      let btns = document.getElementById("btnsend");
+      btns.onclick = function () {
+        e = document.getElementById("DRsname").value;
         console.log(e);
         fetch(
-            'http://" + window.location.hostname + ":8080/send-telegram',
-            {
-                method : 'POST',
-                body : JSON.stringify(e),
-                headers : {
-                    'Content-type': 'application/json; charset=UTF-8'
-                },
-                
-            }
-        ).then(function (params) {
-            console.log("hi")
-            
-        }).catch(function (params){
-            console.log("bi")
-        })
-    }
-</script>
-</body>
+          window.location.protocol +
+            "://" +
+            window.location.hostname +
+            ":8080/send-telegram",
+          {
+            method: "POST",
+            body: JSON.stringify(e),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+          .then(function (params) {
+            console.log("hi");
+          })
+          .catch(function (params) {
+            console.log("bi");
+          });
+      };
+    </script>
+  </body>
 </html>
-
-
->>>>>>> 798425c87d051a9b4d63229e940c313102d90cb5
