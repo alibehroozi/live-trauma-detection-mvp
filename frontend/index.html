@@ -44,10 +44,10 @@
       function displyfunc() {
         document.getElementById("sendreporttodr").style.display = "flex";
       }
-      
-      function nodisplyfunc(){
-            document.getElementById("sendreporttodr").style.display="none"
-        }
+
+      function nodisplyfunc() {
+        document.getElementById("sendreporttodr").style.display = "none";
+      }
     </script>
   </head>
   <body class="bg-light">
@@ -105,11 +105,12 @@
               onclick="setTimeout(displyfunc, 20000);"
             />
           </div>
+          <!--comment-->
         </form>
         <p class="py-2 text-warning ps-1">
           note: just zip, rar and 7zip are accepted !
         </p>
-         <pre class="py-2 text-warning ps-1">
+        <pre class="py-2 text-warning ps-1">
 note: The answer is displayed after 20 seconds
 Please avoid pressing the upload button repeatedly !
         </pre>
@@ -126,7 +127,6 @@ Please avoid pressing the upload button repeatedly !
           >
             <option value="rohambor">DR borazjani</option>
             <option value="rosemina1995">DR bahrololom</option>
-            <option value="zeinabsayyadi">test send to zeinab </option>
           </select>
           <button
             type="submit"
@@ -170,16 +170,13 @@ Please avoid pressing the upload button repeatedly !
       btns.onclick = function () {
         e = document.getElementById("DRsname").value;
         console.log(e);
-        fetch(
-          'http://188.40.183.154/send-telegram',
-          {
-            method: "POST",
-            body: JSON.stringify(e),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        )
+        fetch("http://188.40.183.154/send-telegram", {
+          method: "POST",
+          body: JSON.stringify(e),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
           .then(function (params) {
             console.log("hi");
           })

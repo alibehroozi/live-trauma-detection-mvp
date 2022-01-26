@@ -254,4 +254,3 @@ def ai_main_func(workingDir, dicomsZipFile):
         str(pngResultPath), "0.png"), str(pdfResultPath), str(reportZipPath))
 
 # read workingDir/result_pdf/report.zip
-
