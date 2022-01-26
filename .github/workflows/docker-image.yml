@@ -30,5 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: alibehroozi/liver-trauma-detection-mvp:master1
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: alibehroozi/liver-trauma-detection-mvp:latest261
