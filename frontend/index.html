@@ -105,11 +105,14 @@
               onclick="setTimeout(displyfunc, 20000);"
             />
           </div>
-          <!--comment-->
         </form>
         <p class="py-2 text-warning ps-1">
           note: just zip, rar and 7zip are accepted !
         </p>
+         <pre class="py-2 text-warning ps-1">
+note: The answer is displayed after 20 seconds
+Please avoid pressing the upload button repeatedly !
+        </pre>
         <section
           class="flex-column mx-2container px-2 pt-3 rounded-2"
           id="sendreporttodr"
@@ -122,6 +125,7 @@
             id="DRsname"
           >
             <option value="rohambor">DR borazjani</option>
+            <option value="rosemina1995">DR bahrololom</option>
           </select>
           <button
             type="submit"
@@ -166,10 +170,7 @@
         e = document.getElementById("DRsname").value;
         console.log(e);
         fetch(
-          window.location.protocol +
-            "//" +
-            window.location.hostname +
-            ":8080/send-telegram",
+          'http://188.40.183.154/send-telegram',
           {
             method: "POST",
             body: JSON.stringify(e),
