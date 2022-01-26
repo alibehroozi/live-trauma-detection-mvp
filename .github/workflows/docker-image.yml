@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: alibehroozi/liver-trauma-detection-mvp:latest261
+          tags: alibehroozi/liver-trauma-detection-mvp:latest262
