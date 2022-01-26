@@ -30,5 +30,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: master1
+          tags: latest
           labels: ${{ steps.meta.outputs.labels }}
