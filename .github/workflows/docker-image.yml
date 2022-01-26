@@ -25,10 +25,14 @@ jobs:
         with:
           images: alibehroozi/liver-trauma-detection-mvp
       
+      - name: Get tag
+        run: echo "::set-output name=tag::$(git rev-parse HEAD)"
+        id: getTag
+        
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.getTag.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
